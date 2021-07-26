@@ -8,6 +8,6 @@ class IncomingMessages
 {
     public function __invoke(MyMessage $message)
     {
-        
+        echo "Message!!";
     }
 }

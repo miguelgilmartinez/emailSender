@@ -1,5 +1,7 @@
-<?php 
-namespace App\Messages;
-class MyMessage {
+<?php
 
+namespace App\Messages;
+
+class MyMessage
+{
 }
