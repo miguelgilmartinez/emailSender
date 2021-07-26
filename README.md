@@ -1,4 +1,4 @@
-# Email microservice
+# Email sender microservice
 
 This microservice is subscribed to its own message broker queue and sends an
 email for every message it receives, reporting back to the microservice which
