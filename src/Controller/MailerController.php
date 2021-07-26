@@ -7,6 +7,12 @@ use Symfony\Component\Mime\Email;
 
 class MailerController
 {
+    /**
+     * Sends a sad email mail
+     *
+     * @param MailerInterface $mailer
+     * @return Response
+     */
     public function sendEmail(MailerInterface $mailer): Response
     {
         $email = (new Email())
