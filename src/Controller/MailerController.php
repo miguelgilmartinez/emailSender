@@ -13,7 +13,7 @@ class MailerController
      * @param MailerInterface $mailer
      * @return Response
      */
-    public function sendEmail(MailerInterface $mailer): Response
+    public function sendEmail(MailerInterface $mailer)
     {
         $email = (new Email())
             ->from('hello@example.com')
