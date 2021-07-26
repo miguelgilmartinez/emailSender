@@ -8,7 +8,10 @@ framework:
             # async: '%env(MESSENGER_TRANSPORT_DSN)%'
             # failed: 'doctrine://default?queue_name=failed'
             # sync: 'sync://'
+            emailSender: '%env(MESSENGER_TRANSPORT_DSN)%/emailSender'  
 
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
+            'App\MessageBus\Message\MyMessage': emailSender
+
