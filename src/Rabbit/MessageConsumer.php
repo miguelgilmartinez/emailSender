@@ -9,19 +9,29 @@ use App\Controller\MailController;
 class MessageConsumer implements ConsumerInterface
 {
 
-   public $mailer;
+    public $mailer;
 
     public function execute(AMQPMessage $msg)
     {
+        echo 'New user: ' . ($msg->body) . "\n";
         $message = json_decode($msg->body, true);
-        echo 'Received a message: ' . json_encode($message) . "\n";
-        $this->sendEmailNow($message);
+        $emailData = [
+            'from' => 'welcome@goanddo.org',
+            'to' => $message['email'],
+            'subject' => "{$message['username']} Welcome to a better and heathier life",
+            'body' => "Blah blah blah",
+            'html' => "<body>Blah in HTML</body>"
+        ];
+
+
+        $this->mailer->sendEmail($emailData);
     }
 
-    public function sendEmailNow(array $message)
+    /**
+     * @required
+     */
+    public function setMailer(MailController $mailer)
     {
-        $mailer = new MailController();
-
-        $mailer->sendEmail($message);
+        $this->mailer = $mailer;
     }
 }

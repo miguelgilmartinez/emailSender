@@ -31,5 +31,5 @@ services:
 
     app.message_consumer:
         class: App\Rabbit\MessageConsumer
-        properties:
-            mailer: '@message_service'
+        calls:
+            - setMailer: ['@mailer']
