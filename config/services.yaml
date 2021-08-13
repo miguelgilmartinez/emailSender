@@ -20,6 +20,16 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
-
+    App\MessageBus\Message\NewUser:
+        autowire: false
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    message_service:
+        class: App\Rabbit\MessageConsumer
+
+    App\Rabbit\MessageProducer: "@old_sound_rabbit_mq.my_messaging_producer"
+
+    app.message_consumer:
+        class: App\Rabbit\MessageConsumer
+        properties:
+            mailer: '@message_service'
