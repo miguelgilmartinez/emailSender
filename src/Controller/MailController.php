@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+//use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +29,7 @@ class MailController
                 'from' =>  'hello@example.com',
                 'to' => 'you@example.com',
                 'subject' => 'Time for Symfony Mailer!',
-                'body' =>  'Sending emails is fun again!',
+                'text' =>  'Sending emails is fun again!',
                 'html' => '<p>See Twig integration for better HTML integration!</p>'
             ]
         );
@@ -37,16 +37,16 @@ class MailController
     }
 
     /**
-     *    The mosrt important method here... sends an email
-     *   @param array $emailData [from, to, subject, body, html]
+     * The most important method here... sends an email
+     * @param array $emailData [from, to, subject, body, html]
      */
     public function sendEmail(array $emailData)
     {
         $email = (new Email())
             ->from($emailData['from'])
             ->to($emailData['to'])
-            ->subject($emailData['subject'])
-            ->text($emailData['body'])
+            ->subject("OOOOOOOOO" . $emailData['subject'])
+            ->text($emailData['text'])
             ->html($emailData['html']);
         //->cc('cc@example.com')
         //->bcc('bcc@example.com')

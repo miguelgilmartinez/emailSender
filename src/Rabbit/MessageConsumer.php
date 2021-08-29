@@ -6,32 +6,31 @@ use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use App\Controller\MailController;
 
+/**
+ * Consume messages from RabbitMQ and send emails.
+ */
 class MessageConsumer implements ConsumerInterface
 {
 
-    public $mailer;
+    public $mailController;
 
+    /**
+     * Consume a message from queue.
+     * @param AMQPMessage $msg
+     * @return void
+     */
     public function execute(AMQPMessage $msg)
     {
-        echo 'New user: ' . ($msg->body) . "\n";
         $message = json_decode($msg->body, true);
-        $emailData = [
-            'from' => 'welcome@goanddo.org',
-            'to' => $message['email'],
-            'subject' => "{$message['username']} Welcome to a better and heathier life",
-            'body' => "Blah blah blah",
-            'html' => "<body>Blah in HTML</body>"
-        ];
-
-
-        $this->mailer->sendEmail($emailData);
+        $this->mailController->sendEmail($message);
     }
 
     /**
      * @required
+     * Inject the MailController
      */
     public function setMailer(MailController $mailer)
     {
-        $this->mailer = $mailer;
+        $this->mailController = $mailer;
     }
 }

@@ -33,3 +33,7 @@ services:
         class: App\Rabbit\MessageConsumer
         calls:
             - setMailer: ['@mailer']
+    
+    # Set this private for production
+    App\Controller\MailController:
+        public: true
